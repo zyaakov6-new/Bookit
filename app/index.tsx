@@ -10,9 +10,7 @@ import {
   useFonts,
   PlayfairDisplay_700Bold,
 } from '@expo-google-fonts/playfair-display';
-import {
-  DancingScript_700Bold,
-} from '@expo-google-fonts/dancing-script';
+import { DancingScript_700Bold } from '@expo-google-fonts/dancing-script';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import ReadingIllustration from '@/components/ReadingIllustration';
@@ -38,7 +36,7 @@ export default function WelcomeScreen() {
     <View
       style={[
         styles.container,
-        { paddingTop: insets.top + 32, paddingBottom: insets.bottom + 24 },
+        { paddingTop: insets.top + 32, paddingBottom: insets.bottom + 28 },
       ]}
     >
       {/* Title */}
@@ -46,11 +44,18 @@ export default function WelcomeScreen() {
 
       {/* Tagline */}
       <Text style={styles.subtitle}>
-        Track your reading. Challenge friends.{'\n'}Build the habit that sticks.
+        Turn your reading list{'\n'}into a reading habit.
       </Text>
 
+      {/* Value-prop trio */}
+      <Text style={styles.perks}>Track · Streak · Discover</Text>
+
       {/* Illustration */}
-      <View style={styles.illustrationWrapper}>
+      <View
+        style={styles.illustrationWrapper}
+        accessibilityRole="image"
+        accessibilityLabel="Person reading comfortably in an armchair"
+      >
         <ReadingIllustration />
       </View>
 
@@ -65,24 +70,25 @@ export default function WelcomeScreen() {
           // TODO: navigate to sign-up screen
         }}
         accessibilityRole="button"
-        accessibilityLabel="Join Now"
+        accessibilityLabel="Get Started Free"
       >
-        <Text style={styles.buttonLabel}>Join Now</Text>
+        <Text style={styles.buttonLabel}>Get Started Free</Text>
       </Pressable>
 
       {/* Footer */}
-      <Text style={styles.footer}>
-        Already have an account?{' '}
-        <Text
-          style={styles.signIn}
+      <View style={styles.footerRow}>
+        <Text style={styles.footer}>Already have an account? </Text>
+        <Pressable
           onPress={() => {
             // TODO: navigate to sign-in screen
           }}
+          style={styles.signInPressable}
           accessibilityRole="link"
+          accessibilityLabel="Sign in"
         >
-          Sign in.
-        </Text>
-      </Text>
+          <Text style={styles.signIn}>Sign in.</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -102,16 +108,23 @@ const styles = StyleSheet.create({
     color: '#3D2314',
     letterSpacing: 1,
     textAlign: 'center',
-    marginBottom: 14,
+    marginBottom: 12,
   },
   subtitle: {
     fontFamily: 'PlayfairDisplay_700Bold',
-    fontSize: 15,
+    fontSize: 17,
     color: '#2C2C2C',
     textAlign: 'center',
-    lineHeight: 23,
+    lineHeight: 26,
     letterSpacing: 0.2,
-    fontWeight: '400',
+  },
+  perks: {
+    marginTop: 12,
+    fontSize: 12,
+    color: '#7A5430',
+    letterSpacing: 2.5,
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
 
   /* ── Illustration ───────────────────────────── */
@@ -148,14 +161,23 @@ const styles = StyleSheet.create({
   },
 
   /* ── Footer ─────────────────────────────────── */
+  footerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
   footer: {
-    marginTop: 18,
-    fontSize: 13,
+    fontSize: 14,
     color: '#666666',
     fontStyle: 'italic',
   },
+  signInPressable: {
+    paddingVertical: 8,
+    paddingHorizontal: 2,
+  },
   signIn: {
-    color: '#8B6343',
+    fontSize: 14,
+    color: '#7A5430',
     fontStyle: 'italic',
     textDecorationLine: 'underline',
   },
